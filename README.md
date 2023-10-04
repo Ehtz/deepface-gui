@@ -5,7 +5,7 @@ Simple GUI for deepface ONLY "DeepFace.find"
 
 
 ```python
-dfs = DeepFace.find(img_path = "img1.jpg", db_path = "C:/workspace/my_db")
+dfs = DeepFace.find(img2_path, db_path=db_path, model_name='Facenet512', enforce_detection=False)
 ```
 
 <p align="center"><img src="https://raw.githubusercontent.com/serengil/deepface/master/icon/stock-6-v2.jpg" width="95%" height="95%"></p>
