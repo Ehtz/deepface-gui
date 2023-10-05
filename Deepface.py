@@ -8,6 +8,10 @@ import tkinter as tk
 from tkinter import filedialog
 from deepface import DeepFace
 import os
+import matplotlib.pyplot as plt
+import cv2
+import pandas as pd
+from IPython.display import display
 
 # Initialize global variables
 db_path = ""
