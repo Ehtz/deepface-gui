@@ -65,7 +65,7 @@ def find_similar_faces():
         result_text.delete(1.0, tk.END)
         result_text.insert(tk.END, "Please select both a database folder and a second image.")
     else:
-        pd.options.display.max_columns = None
+        pd.set_option('display.max_colwidth', -1)
         dfs = DeepFace.find(img2_path, db_path=db_path, model_name='Facenet512', enforce_detection=False)
 
         # Display the results in the text widget
