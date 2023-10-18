@@ -1,6 +1,6 @@
 # Simple DeepFace GUI by Ehtz
 
-This is a simple graphical user interface (GUI) for DeepFace, a deep learning framework for facial recognition. The GUI allows you to find similar faces in a database using various face recognition models. Here's how to use it:
+This is a *simple* graphical user interface (GUI) for DeepFace, a deep learning framework for facial recognition. The GUI allows you to find similar faces in a database using various face recognition models. Here's how to use it:
 
 ## Getting Started
 1. Ensure you have Python installed on your system.
@@ -8,40 +8,47 @@ This is a simple graphical user interface (GUI) for DeepFace, a deep learning fr
 2. Clone this repository or download the `deepface_gui.py` file to your local machine.
 
 3. Install the required Python libraries by running the following command:
-   ```shell
-   pip install deepface pandas
-Running the Application
-Open a terminal or command prompt.
+pip install deepface pandas
 
-Navigate to the directory where the deepface_gui.py file is located.
-
-Run the application by executing the following command:
-
-shell
+markdown
 Copy code
+
+## Running the Application
+1. Open a terminal or command prompt.
+
+2. Navigate to the directory where the `deepface_gui.py` file is located.
+
+3. Run the application by executing the following command:
 python deepface_gui.py
-The GUI application window will open.
 
-How to Use
-Database Images Folder: Click the "Select Folder" button to choose a folder containing your database images. This is the collection of images you want to search for similar faces in.
+vbnet
+Copy code
 
-Base Image: Click the "Select Image" button to choose the image you want to find similar faces for. You can also click "Open Base Image" to view the selected image.
+4. The GUI application window will open.
 
-Select Model: Choose a face recognition model from the dropdown menu. The default is "Facenet512," but you can select other models provided in the list.
+## How to Use
+- **Database Images Folder**: Click the "Select Folder" button to choose a folder containing your database images. This is the collection of images you want to search for similar faces in.
 
-Click the "Find Similar Faces" button to start the face recognition process.
+- **Base Image**: Click the "Select Image" button to choose the image you want to find similar faces for. You can also click "Open Base Image" to view the selected image.
 
-The results will be displayed in the text area below. You will see a list of similar faces found in the database, along with similarity scores for the selected model.
+- **Select Model**: Choose a face recognition model from the dropdown menu. The default is "Facenet512," but you can select other models provided in the list.
 
-Use the scrollbar on the right to scroll through the results.
+- Click the "Find Similar Faces" button to start the face recognition process.
 
-Important Notes
-This application uses DeepFace for face recognition. Make sure to provide a database folder with images and a base image for comparison.
+- The results will be displayed in the text area below. You will see a list of similar faces found in the database, along with similarity scores for the selected model.
 
-The accuracy of the results depends on the selected model and the quality of the images in your database.
+- Use the scrollbar on the right to scroll through the results.
 
-If you encounter any errors or issues, please make sure you have correctly installed the required libraries and provided valid file paths.
+## Important Notes
+- This application uses DeepFace for face recognition. Make sure to provide a database folder with images and a base image for comparison.
 
+- The accuracy of the results depends on the selected model and the quality of the images in your database.
+
+- If you encounter any errors or issues, please make sure you have correctly installed the required libraries and provided valid file paths.
+
+
+
+---
 
 
 
@@ -52,7 +59,7 @@ If you encounter any errors or issues, please make sure you have correctly insta
 
 
 
-
+---
 
 
 [Face recognition](https://sefiks.com/2020/05/25/large-scale-face-recognition-for-deep-learning/) requires applying face verification many times. Herein, deepface has an out-of-the-box find function to handle this action. It's going to look for the identity of input image in the database path and it will return list of pandas data frame as output. Meanwhile, facial embeddings of the facial database are stored in a pickle file to be searched faster in next time. Result is going to be the size of faces appearing in the source image. Besides, target images in the database can have many faces as well.
@@ -64,14 +71,68 @@ dfs = DeepFace.find(img2_path, db_path=db_path, model_name=selected_model, enfor
 Added Drop Down -  Chose between certain models
 FaceNet, VGG-Face, ArcFace and Dlib are [overperforming](https://youtu.be/i_MOwvhbLdI) ones based on experiments. You can find out the scores of those models below on both [Labeled Faces in the Wild](https://sefiks.com/2020/08/27/labeled-faces-in-the-wild-for-face-recognition/) and YouTube Faces in the Wild data sets declared by its creators.
 
-| Model | LFW Score | YTF Score |
-| ---   | --- | --- |
-| Facenet512 | 99.65% | - |
-| SFace | 99.60% | - |
-| ArcFace | 99.41% | - |
-| Dlib | 99.38 % | - |
-| Facenet | 99.20% | - |
-| VGG-Face | 98.78% | 97.40% |
-| *Human-beings* | *97.53%* | - |
-| OpenFace | 93.80% | - |
-| DeepID | - | 97.05% |
+<div align="center">
+  <table>
+    <tr>
+      <th>Model</th>
+      <th>LFW Score</th>
+      <th>YTF Score</th>
+    </tr>
+    <tr>
+      <td>Facenet512</td>
+      <td>99.65%</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>SFace</td>
+      <td>99.60%</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>ArcFace</td>
+      <td>99.41%</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>Dlib</td>
+      <td>99.38%</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>Facenet</td>
+      <td>99.20%</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>VGG-Face</td>
+      <td>98.78%</td>
+      <td>97.40%</td>
+    </tr>
+    <tr>
+      <td><i>Human-beings</i></td>
+      <td><i>97.53%</i></td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>OpenFace</td>
+      <td>93.80%</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>DeepID</td>
+      <td>-</td>
+      <td>97.05%</td>
+    </tr>
+  </table>
+</div>
+
+
+---
+Enjoy using this **Simple DeepFace GUI**!
+
+**Author**: Ehtz
+
+**GitHub Repository**: [link]([https://github.com/yourusername/your-repo](https://github.com/Ehtz/deepface-gui))
+
+Please report any issues or suggestions on the GitHub repository.
+
