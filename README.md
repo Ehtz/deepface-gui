@@ -1,5 +1,5 @@
 # deepface-gui
-Simple GUI for deepface ONLY "DeepFace.find" [In Progress]
+**Simple GUI for deepface ONLY "DeepFace.find" [In Progress]** 
 
 ![Screenshot](Screenshot.png)
 
