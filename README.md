@@ -54,7 +54,9 @@ Copy code
 
 
 ![Screenshot](Screenshot.png)
-
+<div align="center">
+<p>(Screen shot taken of the GUI)</p>
+</div>
 
 
 
