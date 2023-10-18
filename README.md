@@ -136,7 +136,7 @@ Enjoy using this **Simple DeepFace GUI**!
 
 **GitHub Repository**: [link](https://github.com/Ehtz)
 
-**Link towards the main DeepFace project **: [link](https://github.com/serengil/deepface)
+**Link towards the main DeepFace project**: [link](https://github.com/serengil/deepface)
 
 Please report any issues or suggestions on the GitHub repository.
 
