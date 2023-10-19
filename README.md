@@ -8,10 +8,8 @@ This is a *simple* graphical user interface (GUI) for DeepFace, a deep learning 
 2. Clone this repository or download the `deepface_gui.py` file to your local machine.
 
 3. Install the required Python libraries by running the following command:
-pip install deepface pandas
+`pip install deepface pandas`
 
-markdown
-Copy code
 
 ## Running the Application
 1. Open a terminal or command prompt.
