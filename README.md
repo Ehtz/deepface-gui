@@ -17,12 +17,9 @@ This is a *simple* graphical user interface (GUI) for DeepFace, a deep learning 
 2. Navigate to the directory where the `deepface_gui.py` file is located.
 
 3. Run the application by executing the following command:
-python deepface_gui.py
+`python deepface_gui.py`
 
-vbnet
-Copy code
-
-4. The GUI application window will open.
+5. The GUI application window will open.
 
 ## How to Use
 - **Database Images Folder**: Click the "Select Folder" button to choose a folder containing your database images. This is the collection of images you want to search for similar faces in.
