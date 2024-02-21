@@ -70,7 +70,7 @@ def find_similar_faces():
         result_text.delete(1.0, tk.END)
         result_text.insert(tk.END, "Please select both a database folder and a second image.")
     else:
-        pd.set_option('display.max_colwidth', -1)
+        # pd.set_option('display.max_colwidth', -1)
         pd.options.display.max_rows = 4000
         selected_model = model_selection.get()  # Get the selected model from the dropdown
         dfs = DeepFace.find(img2_path, db_path=db_path, model_name=selected_model, distance_metric='cosine', enforce_detection=False)
@@ -80,12 +80,10 @@ def find_similar_faces():
         
         # Extract the DataFrame from the sublist
         df = dfs[0]
-        
+
+        #"Facenet512": {"cosine": 0.30, "euclidean": 23.56, "euclidean_l2": 1.04},
         # Insert the string representation of df into the result_text widget
-        result_text.insert(tk.END, df.to_string(float_format="{:.6f}".format))
-
-
-
+        result_text.insert(tk.END, df.to_string(float_format="{:.6f}".format, index=True))
 
 
 # Create a main window
@@ -134,7 +132,8 @@ find_button = tk.Button(root, text="Find Similar Faces", pady=15, bg="red", fg='
 find_button.grid(row=6, column=0, columnspan=5, padx=10, pady=10)
 
 # Create a text wido display the results
-result_text = tk.Text(root, width=200, height=25, selectbackground="yellow", selectforeground='black', undo=True)
+#Tried increase hight to get more entries i don't think it is the tk limiting output entries but more of the models themselves
+result_text = tk.Text(root, width=200, height=100, selectbackground="yellow", selectforeground='black', undo=True) 
 result_text.grid(row=7, column=0, columnspan=5, padx=10, pady=10)
 
 # Create a scrollbar and attach it to the text widget
