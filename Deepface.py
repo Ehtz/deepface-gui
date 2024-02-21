@@ -1,6 +1,16 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import subprocess
+import sys
+import pkg_resources
+
+# Download the latest version of DeepFace silently
+subprocess.call(['pip', 'install', '--upgrade', 'deepface'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+# Get DeepFace version
+deepface_version = pkg_resources.get_distribution("deepface").version
+
 import tkinter as tk
 from tkinter import *
 from tkinter import font
@@ -24,9 +34,6 @@ models = [
     "Dlib",
     "SFace",
 ]
-
-
-
 
 # Function to open a folder dialog and update db_path
 def select_folder():
@@ -55,9 +62,10 @@ def open_second_image():
         result_text.delete(1.0, tk.END)
         result_text.insert(tk.END, "Please select a second image.")
 
-# Function to perform the DeepFace.find() when the user clicks a button
+# Function to perform the DeepFace.find() when the user clicks the button 'find button'
 def find_similar_faces():
-    global db_path, img2_path, dfs
+    global db_path, img2_path, dfs, result_text
+    
     if not db_path or not img2_path:
         result_text.delete(1.0, tk.END)
         result_text.insert(tk.END, "Please select both a database folder and a second image.")
@@ -65,54 +73,53 @@ def find_similar_faces():
         pd.set_option('display.max_colwidth', -1)
         pd.options.display.max_rows = 4000
         selected_model = model_selection.get()  # Get the selected model from the dropdown
-        dfs = DeepFace.find(img2_path, db_path=db_path, model_name=selected_model, enforce_detection=False)
+        dfs = DeepFace.find(img2_path, db_path=db_path, model_name=selected_model, distance_metric='cosine', enforce_detection=False)
 
         # Display the results in the text widget
         result_text.delete(1.0, tk.END)  # Clear previous results
-
-        for i, item in enumerate(dfs):
-            combined_text = f"{i + 1}. {item['identity']}  {selected_model}_cosine: {item[selected_model + '_cosine']}\n"
-            result_text.insert(tk.END, combined_text)
-
-            
         
+        # Extract the DataFrame from the sublist
+        df = dfs[0]
+        
+        # Insert the string representation of df into the result_text widget
+        result_text.insert(tk.END, df.to_string(float_format="{:.6f}".format))
+
+
+
+
+
 # Create a main window
 root = tk.Tk()
 root.title("Simple DeepFace Gui by Ehtz")
 
+# Label to display DeepFace version
+deepface_version_label = tk.Label(root, text=f"DeepFace Version: {deepface_version}")
+deepface_version_label.grid(row=0, column=3)
 
 # Create a label and an entry widget for db_path
 db_path_label = tk.Label(root, text="Database Images Folder:")
-db_path_label.grid(row=0, column=0)
+db_path_label.grid(row=1, column=0)
 
 select_folder_button = tk.Button(root, text="Select Folder", command=select_folder)
-select_folder_button.grid(row=0, column=1)
+select_folder_button.grid(row=1, column=1)
 
 db_path_entry = tk.Entry(root, textvariable=db_path, width=50)
-db_path_entry.grid(row=0, column=2)
-
-
-
-
+db_path_entry.grid(row=1, column=2)
 
 # Create a label and an entry widget for img2_path
 img2_path_label = tk.Label(root, text="Base Image:")
-img2_path_label.grid(row=1, column=0, pady=25)
+img2_path_label.grid(row=2, column=0, pady=25)
 
 # Create a button to open the file selection dialog for img2_path
 select_image_button = tk.Button(root, text="Select Image", command=select_image)
-select_image_button.grid(row=1, column=1)
+select_image_button.grid(row=2, column=1)
 
 # Create a button to open the selected second image
 open_second_image_button = tk.Button(root, text="Open Base Image", command=open_second_image)
-open_second_image_button.grid(row=1, column=3)
+open_second_image_button.grid(row=2, column=3)
 
 img2_path_entry = tk.Entry(root, textvariable=img2_path, width=50)
-img2_path_entry.grid(row=1, column=2)
-
-
-
-
+img2_path_entry.grid(row=2, column=2)
 
 # Create a dropdown menu for selecting the model
 model_label = tk.Label(root, text="Select Model:")
@@ -121,9 +128,6 @@ model_label.grid(row=4, column=0)
 model_selection = ttk.Combobox(root, values=models)
 model_selection.set("Facenet512")
 model_selection.grid(row=4, column=1)
-
-
-
 
 # Create a button to trigger the find_similar_faces function
 find_button = tk.Button(root, text="Find Similar Faces", pady=15, bg="red", fg='white', command=find_similar_faces)
@@ -137,8 +141,6 @@ result_text.grid(row=7, column=0, columnspan=5, padx=10, pady=10)
 text_scroll = tk.Scrollbar(root, command=result_text.yview)
 text_scroll.grid(row=7, column=5, sticky="ns")
 result_text.config(yscrollcommand=text_scroll.set)
-
-
 
 # Start the tkinter main loop
 root.geometry("1650x500")
