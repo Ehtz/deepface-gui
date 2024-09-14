@@ -1,4 +1,4 @@
-# Simple DeepFace GUI by Ehtz
+# Simple DeepFace UI by Ehtz
 
 This is a *simple* graphical user interface (GUI) for DeepFace, a deep learning framework for facial recognition. The GUI allows you to find similar faces in a database using various face recognition models. Here's how to use it:
 
